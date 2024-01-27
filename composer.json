@@ -1,0 +1,17 @@
+{
+    "name": "edi/storeapp",
+    "description": "This project will help stores, in data management",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "junaedi maorjahan gultom",
+            "email": "jmg290601@gmail.com"
+        }
+    ],
+    "require": {}
+}
