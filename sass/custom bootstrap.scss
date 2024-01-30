@@ -1,3 +1,29 @@
-@import "bootstrap/scss/bootstrap"; 
+@import "scss/bootstrap";
 
+@import "scss/functions";
+@import "scss/variables";
+@import "scss/variables-dark";
 
+/* customize primary dark */
+
+[data-bs-theme="light"] {
+  --bs-body-bg: #dee4e7;
+  --custom-body-bg: #fff;
+  .btn-custom {
+    --bs-btn-bg: #{lightcoral};
+  }
+}
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #dee4e7;
+  --custom-body-bg: #37474f;
+  .btn-custom {
+    --bs-btn-bg: #{lightgreen};
+  }
+}
+
+nav,
+main,
+header {
+  background-color: #{var(--custom-body-bg)};
+}

@@ -2,15 +2,13 @@
 
 namespace app\controller;
 
-class Main
-{
-    function __construct()
-    {
-        echo "<h1>Main</h1>";
-    }
+use app\core\Controller;
 
-    function index()
+class Main extends Controller
+{
+    function index($data)
     {
-        echo "<h1>Index | Main</h1>";
+        $this->getView("../view/static/main", $data);
     }
+ 
 }

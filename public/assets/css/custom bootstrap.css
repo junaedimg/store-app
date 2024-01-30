@@ -11854,4 +11854,26 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+/* customize primary dark */
+[data-bs-theme=light] {
+  --bs-body-bg: #dee4e7;
+  --custom-body-bg: #fff;
+}
+[data-bs-theme=light] .btn-custom {
+  --bs-btn-bg: lightcoral;
+}
+
+[data-bs-theme=dark] {
+  --bs-body-bg: #dee4e7;
+  --custom-body-bg: #37474f;
+}
+[data-bs-theme=dark] .btn-custom {
+  --bs-btn-bg: lightgreen;
+}
+
+nav,
+main,
+header {
+  background-color: var(--custom-body-bg);
 }/*# sourceMappingURL=custom bootstrap.css.map */
