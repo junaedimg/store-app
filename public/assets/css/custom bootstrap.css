@@ -11855,25 +11855,76 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-/* customize primary dark */
-[data-bs-theme=light] {
+/* -----Customize Style----- */
+:root {
   --bs-body-bg: #dee4e7;
-  --custom-body-bg: #fff;
+}
+
+[data-bs-theme=light] {
+  --custom-ui-bg: #fff;
+  --custom-ui-bg-invert: #37474f;
 }
 [data-bs-theme=light] .btn-custom {
   --bs-btn-bg: lightcoral;
 }
 
 [data-bs-theme=dark] {
-  --bs-body-bg: #dee4e7;
-  --custom-body-bg: #37474f;
+  --custom-ui-bg: #37474f;
+  --custom-ui-bg-invert: #fff;
 }
 [data-bs-theme=dark] .btn-custom {
   --bs-btn-bg: lightgreen;
 }
 
-nav,
-main,
-header {
-  background-color: var(--custom-body-bg);
+#main-page nav,
+#main-page main,
+#main-page header {
+  background-color: var(--custom-ui-bg);
+}
+#main-page nav a,
+#main-page nav a:hover,
+#main-page nav a:visited,
+#main-page nav a:active,
+#main-page main a,
+#main-page main a:hover,
+#main-page main a:visited,
+#main-page main a:active,
+#main-page header a,
+#main-page header a:hover,
+#main-page header a:visited,
+#main-page header a:active {
+  color: var(--custom-ui-bg-invert);
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  nav ul li a {
+    gap: 10px;
+    display: flex;
+  }
+  nav .active {
+    background-color: var(--custom-ui-bg-invert);
+  }
+  nav .active a,
+  nav .active a:hover,
+  nav .active a:visited,
+  nav .active a:active,
+  nav .active span,
+  nav .active i {
+    color: var(--custom-ui-bg);
+    text-decoration: none;
+  }
+  header .account {
+    display: flex;
+    gap: 10px;
+  }
+  header .account .image-user {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: grey;
+  }
+  header .account .user {
+    width: max-content;
+  }
 }/*# sourceMappingURL=custom bootstrap.css.map */
