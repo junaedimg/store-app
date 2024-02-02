@@ -10,5 +10,4 @@ class Main extends Controller
     {
         $this->getView("../view/static/main", $data);
     }
- 
 }

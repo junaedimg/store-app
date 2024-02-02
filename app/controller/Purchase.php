@@ -4,7 +4,7 @@ namespace app\controller;
 
 use app\core\Controller;
 
-class Dashboard extends Controller
+class Purchase extends Controller
 {
     function index($data)
     {

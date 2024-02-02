@@ -5,6 +5,6 @@ namespace app\config;
 class config
 {
     const
-        BASEURL = "http://localhost/",
+        BASEURL = "http://localhost/store-app/",
         DATABSE = "store-app";
 }

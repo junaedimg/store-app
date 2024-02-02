@@ -10,14 +10,17 @@ use app\config\config;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STORE APP</title>
-    <link rel="stylesheet" href="<?= config::BASEURL ?>store-app/public/assets/css/custom bootstrap.css">
+    <link rel="stylesheet" href="<?= config::BASEURL ?>public/assets/css/custom bootstrap.css">
     <script src="https://kit.fontawesome.com/1b3a0a4af2.js" crossorigin="anonymous"></script>
+    <script src="<?= config::BASEURL ?>public/assets/js/jquery-3.7.1.js"></script>
+    <script src="<?= config::BASEURL ?>public/assets/js/script.js"></script>
 </head>
 
 <body>
     <div class="container-fluid vh-100 p-0 " id="main-page">
         <div class="d-flex h-100">
             <div class="container w-auto p-0">
+
                 <!-- NAVIGATION -->
                 <nav class="h-100 p-3">
                     <div class="container mb-4">
@@ -41,7 +44,7 @@ use app\config\config;
                         </li>
                         <li class="p-2 m-2 list-unstyled rounded-2">
                             <a href="javascript:void(0)" class="text-nowrap">
-                                <div class="logo"><i class="fa-solid fa-book"></i></div> 
+                                <div class="logo"><i class="fa-solid fa-book"></i></div>
                                 <span>Transaction Log</span>
                             </a>
                         </li>
@@ -65,7 +68,7 @@ use app\config\config;
                 <header class="py-2 px-3 d-flex justify-content-between">
                     <h1 class="m-0 ">Header</h1>
                     <div class="option d-flex">
-                        <button class="btn btn-primary btn-custom shadow " id="btnSwitch">Toggle Mode</button>
+                        <button class="btn btn-primary btn-custom shadow " id="btn-switch">Toggle Mode</button>
                         <div class="account p-2 ms-2 list-unstyled rounded-2">
                             <div class="user">
                                 <div class="user-info">
@@ -84,20 +87,16 @@ use app\config\config;
                 <!-- MAIN -->
                 <main class="flex-grow-1 ms-2 mt-2 p-2 rounded-3">
                     <h1>Main</h1>
+                    <form action="/store-app">
+                        <input type="iniINput" name="coba">
+                        <input type="text" name="palkor">
+                        <button type="submit">Kirim</button>
+                    </form>
                     <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit asperiores harum aperiam ipsa dolores velit vero consequuntur error architecto debitis doloremque voluptates, fugit alias! Rerum ipsa optio recusandae explicabo odit!</p>
                 </main>
             </div>
         </div>
     </div>
 </body>
-<script>
-    document.getElementById('btnSwitch').addEventListener('click', () => {
-        if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
-            document.documentElement.setAttribute('data-bs-theme', 'light')
-        } else {
-            document.documentElement.setAttribute('data-bs-theme', 'dark')
-        }
-    })
-</script>
 
 </html>

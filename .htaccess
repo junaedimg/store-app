@@ -1,4 +1,5 @@
+Options -Indexes
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?path=$1 [L,B]
+RewriteRule ^(.*)$ index.php?path=$1 [L,B,QSA]
