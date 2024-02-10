@@ -11,6 +11,7 @@ class App
     function __construct()
     {
         $req = $this->getRequest();
+
         $this->_controller = new ("app\\controller\\" . $req['controller']);
         call_user_func([$this->_controller, $req['methode']], $req['params']);
     }
@@ -22,7 +23,6 @@ class App
         $req = isset($_GET['path']) ? $_GET['path'] : "";
         $req = $this->parseRequest($req);
         $this->validateReq($req);
-
         $req = ["controller" => $this->_controller, "methode" => $this->_methode, "params" => $this->_params];
         return $req;
     }
@@ -32,11 +32,11 @@ class App
     {
         // Parse Path
         $req = rtrim(filter_var($req, FILTER_SANITIZE_URL), '/');
+        $req = str_replace("-", "", $req);
         $req = explode("/", $req);
         // Determine Parameters based on the Request Method
         $params = ($_SERVER['REQUEST_METHOD'] === "GET") ? $_GET : (($_SERVER['REQUEST_METHOD'] === "POST") ? $_POST : null);
         unset($params['path']);
-        // 
         return [
             "controller" => $req ? array_shift($req) : null,
             "methode" => $req ? array_shift($req) : null,

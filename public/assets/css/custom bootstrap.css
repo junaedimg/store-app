@@ -11896,35 +11896,63 @@ textarea.form-control-lg {
   color: var(--custom-ui-bg-invert);
   text-decoration: none;
 }
+#main-page nav ul li a {
+  display: flex;
+  gap: 10px;
+}
 
 @media (min-width: 768px) {
-  nav ul li a {
-    gap: 10px;
-    display: flex;
+  #main-page nav ul {
+    position: relative;
   }
-  nav .active {
+  #main-page nav ul span.nav-selected {
+    position: absolute;
+    display: block;
+    height: 35px;
+    width: 185px;
+    margin-left: 5%;
     background-color: var(--custom-ui-bg-invert);
+    z-index: 1;
+    top: 35px;
+    transition-timing-function: ease-in-out;
+    transition: 0.3s;
   }
-  nav .active a,
-  nav .active a:hover,
-  nav .active a:visited,
-  nav .active a:active,
-  nav .active span,
-  nav .active i {
+  #main-page nav ul li.sub-nav {
+    height: 30px;
+    padding-left: 0px;
+  }
+  #main-page nav ul li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+    height: 45px;
+    z-index: 2;
+  }
+  #main-page nav ul li a {
+    gap: 10px;
+  }
+  #main-page nav .active-nav a,
+  #main-page nav .active-nav a:hover,
+  #main-page nav .active-nav a:visited,
+  #main-page nav .active-nav a:active,
+  #main-page nav .active-nav span,
+  #main-page nav .active-nav i {
     color: var(--custom-ui-bg);
     text-decoration: none;
   }
-  header .account {
+  #main-page header .account {
     display: flex;
     gap: 10px;
   }
-  header .account .image-user {
+  #main-page header .account .image-user {
     height: 40px;
     width: 40px;
     border-radius: 50%;
     background-color: grey;
   }
-  header .account .user {
+  #main-page header .account .user {
     width: max-content;
   }
 }/*# sourceMappingURL=custom bootstrap.css.map */
