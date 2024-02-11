@@ -1,4 +1,4 @@
 # ignore 
 .vscode/
-/docs/scss/
+scss/
 *.css.map
