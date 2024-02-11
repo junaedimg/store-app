@@ -1,3 +1,4 @@
-# VSCode directories
+# ignore 
 .vscode/
-/scss/scss/
+/docs/scss/
+*.css.map
