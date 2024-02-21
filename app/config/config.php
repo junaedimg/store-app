@@ -5,6 +5,9 @@ namespace app\config;
 class config
 {
     const
-        BASEURL = "http://localhost/store-app/",
-        DATABSE = "store-app";
+        HOSTNAME = "localhost",
+        BASEURL = "http://" . SELF::HOSTNAME . "/store-app",
+        DATABASE_NAME = "store_app",
+        DATABASE_USERNAME = "root",
+        DATABSE_PASSWORD = "";
 }

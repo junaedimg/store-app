@@ -5,8 +5,7 @@ Aplikasi berbasis website ini dirancang khusus untuk membantu pemilik bisnis kec
 Fitur utama
 - Stock Management
 - Transaction Records
-- Restock Record
-- Graph/Chart
+- Graph/Chart 
 
 Untuk fitur lainnya yaitu
 - Login System
@@ -16,7 +15,7 @@ Untuk fitur lainnya yaitu
 - User Management (Admin)
 - Responsive Web Design (Desktop&Mobile)
 - Light/dark mode toggle
-- Fliter & Search
+- Fliter & Search Data
 
 ## Demo
 
@@ -27,6 +26,8 @@ Menyusul ~
 **Client:** 
 - JS (Jquery)
 - CSS (BOOTSTRAP SCSS)
+- Datatables (Client Side Rendering)
+- SweetAlert2 (alert)
 
 **Server:** 
 - PHP 8.2.12
@@ -35,7 +36,6 @@ Menyusul ~
 - Phpspreadsheet
 
 ## Lessons Learned
-
 Pada saat dalam tahap pengembangan ini, sudah cukup banyak yang sudah saya pelajari, mulai dari pengaplikasian OOP PHP secara tepat, Konsep MVC pada Web, penggunaan framework seperti Jquery dan Bootstrap, konsep asyncronous untuk membuat web dinamis yang ditujukan untuk membuat Single Page Application, JSON format, dan lain lain. walaupun  sebelumnya saya sudah mempelajarinya, tapi dengan membuat project ini saya dapat pemahaman lebih terhadap materi terkait.
 ## Authors
 

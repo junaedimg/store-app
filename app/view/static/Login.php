@@ -11,3 +11,4 @@ class Login
 }
 
 new login();
+?>

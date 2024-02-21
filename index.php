@@ -12,3 +12,10 @@ function ppp($data)
     var_dump($data);
     echo "<br>";
 }
+
+function pp($data)
+{
+    echo "<br>";
+    print_r($data);
+    echo "<br>";
+}

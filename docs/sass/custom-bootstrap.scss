@@ -1,33 +1,32 @@
 @import "scss/bootstrap";
-@import "scss/functions";
-@import "scss/variables";
-@import "scss/variables-dark";
 
 /* -----Customize Style----- */
 
 // template color
-:root {
-  --bs-body-bg: #dee4e7;
+body {
+  background-color: #dee4e7;
 }
 
 // template color light theme
 [data-bs-theme="light"] {
   --custom-ui-bg: #fff;
   --custom-ui-bg-invert: #37474f;
-  .btn-custom {
-    --bs-btn-bg: #{lightcoral};
-  }
+  --color: #37474f;
+  --color-invert: #fff;
 }
+
 // template color dark theme
 [data-bs-theme="dark"] {
   --custom-ui-bg: #37474f;
   --custom-ui-bg-invert: #fff;
-  .btn-custom {
-    --bs-btn-bg: #{lightgreen};
-  }
+  --color: #fff;
+  --color-invert: #37474f;
 }
 
 // (Custom Main) style that will be applied to all breakpoints
+* {
+  // border: 1px solid rgba($color: red, $alpha: 0.3);
+}
 
 #main-page {
   nav,
@@ -38,7 +37,7 @@
     a:hover,
     a:visited,
     a:active {
-      color: var(--custom-ui-bg-invert);
+      color: var(--color);
       text-decoration: none;
     }
   }
@@ -68,7 +67,7 @@
         z-index: 1;
         top: 35px;
         transition-timing-function: ease-in-out;
-        transition: .3s;
+        transition: 0.3s;
       }
       ul li.sub-nav {
         height: 30px;
@@ -95,7 +94,7 @@
         a:active,
         span,
         i {
-          color: var(--custom-ui-bg);
+          color: var(--color-invert);
           text-decoration: none;
         }
       }
