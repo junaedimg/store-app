@@ -2,14 +2,13 @@
 
 namespace app\core;
 
-class Validation
+class Validator
 {
     public function validateImg($image)
     {
         $size = $image['size'];
         $type = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
         $validType = ["jpg", 'png', 'img'];
-
         // Check if there is an image uploaded
         if ($size <= 0) {
             // echo "--No image uploaded\n";
@@ -45,7 +44,7 @@ class Validation
         // Attempt to move the uploaded file to the specified location
         if (move_uploaded_file($image["tmp_name"], $location)) {
             // echo "The file "  . $hashName . " has been uploaded.";
-            return $location; // Return the file location
+            return  $hashName . "." . $extension; // Return the file location
         } else {
             // echo "Sorry, there was an error uploading your file.";
             return false; // Return false indicating failure

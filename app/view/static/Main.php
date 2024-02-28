@@ -22,7 +22,7 @@ use app\config\config;
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- MAIN -->
     <script defer type="module" src="<?= config::BASEURL ?>/public/assets/js/main.js"></script>
-    <!--  -->
+    <!-- Datatables -->
     <link href="https://cdn.datatables.net/v/dt/dt-2.0.0/datatables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/v/dt/dt-2.0.0/datatables.min.js"></script>
 </head>
@@ -67,17 +67,17 @@ use app\config\config;
                                 <span>Manage Inventory</span>
                             </a>
                         </li>
-                        <li class="list-unstyled rounded-2">
+                        <!-- <li class="list-unstyled rounded-2">
                             <a href="/Chart/index" class="text-nowrap">
                                 <div class="logo"><i class="fa-solid fa-chart-pie"></i></div>
                                 <span>Chart</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="list-unstyled sub-nav">
                             <span>Admin</span>
                         </li>
                         <li class="list-unstyled rounded-2">
-                            <a href="/users/index" class="text-nowrap">
+                            <a href="/user/index" class="text-nowrap">
                                 <div class="logo"><i class="fa-solid fa-user"></i></div>
                                 <span>Users</span>
                             </a>
@@ -98,7 +98,7 @@ use app\config\config;
                                     <span class="name">Junaedi M G</span>
                                     <span class="name">Admin</span>
                                 </div>
-                                <a href="" class="text-nowrap logout">
+                                <a id="btn-logout" class="text-nowrap logout">
                                     <i class="fa-solid fa-right-from-bracket"></i>
                                     <span>Logout</span>
                                 </a>
@@ -112,7 +112,7 @@ use app\config\config;
                 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            sdfsdf
+                            this is modall
                         </div>
                     </div>
                     <!-- TEMPLATE BUTTON -->
@@ -122,19 +122,7 @@ use app\config\config;
                 <!-- MAIN -->
                 <main class="flex-grow-1 ms-2 mt-2 p-2 rounded-3 h-100 pb-5">
                     <?php
-                    // require "app/view/manage-inventory/index.php";
-                    // persiapkan curl
-                    $ch = curl_init();
-                    // set url 
-                    curl_setopt($ch, CURLOPT_URL, "localhost/store-app/manage-inventory/index");
-                    // return the transfer as a string 
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    // $output contains the output string 
-                    $output = curl_exec($ch);
-                    // tutup curl 
-                    curl_close($ch);
-                    // menampilkan hasil curl
-                    echo $output;
+                    (new app\controller\User)->index(array());
                     ?>
                 </main>
                 <!-- END MAIN -->

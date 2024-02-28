@@ -1,8 +1,8 @@
+import { config } from "./modules/config.js";
 import { loadMain } from "./modules/utilities.js";
 console.log(" ! main");
 
 $(function () {
-  
   // Change Theme
   $("#btn-theme").click(function () {
     let currTheme =
@@ -41,5 +41,11 @@ $(function () {
         }
       });
     $("nav ul span.nav-selected").css({ top: postTop + 5 });
+  });
+
+  $(document).on("click", "#btn-logout", function (e) {
+    e.preventDefault();
+    // console.log(config.base_url + "/users/logout");
+    window.location.href = config.base_url + "/user/logout";
   });
 });

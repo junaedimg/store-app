@@ -1,5 +1,9 @@
 # ignore 
 .vscode/
 *.css.map
+# ignore all sass files
 scss/
-
+# Ignore all CSS files
+*.css
+# Except custom-bootstrap.css
+!custom-bootstrap.css

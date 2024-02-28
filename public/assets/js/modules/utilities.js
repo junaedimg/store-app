@@ -52,7 +52,7 @@ export function sendFormData(formData, url, method) {
       processData: false,
       contentType: false,
       success: function (response) {
-        console.log(response)
+        console.log(response);
         res(response);
       },
       error: function (xhr, status, error) {
@@ -96,7 +96,19 @@ export function loadMain(endpoint) {
 }
 
 // Fungsi untuk memuat konten modal
-export function loadModal(endpoint) {
+export function loadModal(endpoint, data = null) {
   let url = config.base_url + endpoint;
-  $(".modal-content").load(url);
+  return new Promise((res) => {
+    data
+      ? $(".modal-content").load(url, data, function (response, status, xhr) {
+          if (status == "success") {
+            res();
+          }
+        })
+      : $(".modal-content").load(url, function (response, status, xhr) {
+          if (status == "success") {
+            res();
+          }
+        });
+  });
 }

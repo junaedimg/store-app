@@ -10,11 +10,16 @@ class App
     // Start App
     function __construct()
     {
+         
+        $this->handleRoute();
+    }
+
+    function handleRoute()
+    {
         $req = $this->getRequest();
         $this->_controller = new ("app\\controller\\" . $req['controller']);
         call_user_func([$this->_controller, $req['methode']], $req['params']);
     }
-
     // Accepts Request
     function getRequest()
     {
@@ -48,6 +53,8 @@ class App
     {
         // Validate is the URL valid?
         $urlSegment = $url;
+        // if controller is login, move method to index
+        $urlSegment['methode'] = ($urlSegment['controller'] == "login") ? "index" : $urlSegment['methode'];
         if ($urlSegment != NULL) {
             // Segment settings to redirect (class, method, parameters)
             $controllerClassName = "app\\controller\\" . $urlSegment['controller'];
@@ -58,8 +65,6 @@ class App
                     if (method_exists($controllerClassName, $urlSegment['methode'])) {
                         // Set Controller, Method and Params, based on Valid Request
                         $this->setRequest($urlSegment);
-                        // image validation, if the image is empty, or does not comply with the rules then set it to null.
-                        $this->_image = $this->validateImage($_FILES);
                     }
                 } // If the methode does not exist, use default class (MAIN/index.php)
             } // If the class/controlller does not exist, use default class (MAIN/index.php)
@@ -71,14 +76,9 @@ class App
     {
         // if the controller and methode is exist, SET!
         $this->_controller = $urlSegment['controller'];
+        // $this->_methode = $urlSegment['methode'];
         $this->_methode = $urlSegment['methode'];
         // the parameter may or may not exist, so it is not mandatory
         $this->_params = $urlSegment['params'] ?? $this->_params;
-    }
-
-    function validateImage($gambar)
-    {
-        // if(empty($gambar['gambar']['size']))
-        return 1;
     }
 }

@@ -23,10 +23,19 @@ class Database
     }
 
     // read data
-    public function read(string $table, $mode = '1', string $cond = "")
+    public function read(string $table, $mode = '1', string $cond = "", array $params = [])
     {
-        $res = $this->conn->query("SELECT * FROM $table $cond");
-        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        $query = "SELECT * FROM $table $cond";
+        // Persiapkan statement
+        $stmt = $this->conn->prepare($query);
+        // Bind parameter jika ada
+        foreach ($params as $key => $value) {
+            $stmt->bindParam(":$key", $value);
+        }
+        // Eksekusi statement
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         // server_side / client_side
         switch ($mode) {
             case '1':
@@ -39,12 +48,39 @@ class Database
         }
     }
 
+
+    public function customQuery(string $quer, string $method)
+    {
+        $res = $this->conn->query($quer);
+        if ($method === "SELECT") {
+            $data = $res->fetchAll(PDO::FETCH_ASSOC);
+            return $data;
+        } elseif ($method === "INSERT" || $method === "UPDATE" || $method === "DELETE") {
+            // Jika method adalah INSERT, UPDATE, atau DELETE, kembalikan jumlah baris yang terpengaruh
+            $res->closeCursor();
+            // Sekarang Anda dapat menjalankan pernyataan SQL tambahan
+            $result = $this->conn->query("SELECT @result_message")->fetchColumn();
+            if ($result == true) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Data berhasil diperbarui'
+                ];
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            }
+        } else {
+            // Jika method tidak valid, kembalikan null atau lakukan tindakan lain sesuai kebutuhan
+            return null;
+        }
+    }
+
     // create data
     public function create(string $table, array $data)
     {
         $columns = implode(', ', array_keys($data));
         $placeholders = ':' . implode(', :', array_keys($data));
         $stmt = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+
         try {
             $stmt = $this->conn->prepare($stmt);
             if ($stmt->execute($data)) {
@@ -54,6 +90,46 @@ class Database
                 ];
             }
         } catch (PDOException $e) {
+            echo $e;
+            $response = [
+                'status' => 'error',
+                'message' => 'Gagal memperbarui data'
+            ];
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+    // update
+    public function update($table, $data, $primaryK)
+    {
+        $setClause = '';
+        foreach ($data as $key => $value) {
+            $setClause .= "$key = :$key, "; // Membentuk bagian SET dalam query
+        }
+        $setClause = rtrim($setClause, ', '); // Menghapus koma ekstra di akhir string
+
+        // Contoh penggunaan WHERE clause: diasumsikan Anda memiliki sebuah kunci unik untuk row yang ingin diupdate
+        $whereClause = 'WHERE ' . array_key_first($primaryK) . '= :' . array_key_first($primaryK); // Ganti dengan kunci unik yang sesuai dengan tabel Anda
+        $query = "UPDATE $table SET $setClause $whereClause";
+        try {
+            $stmt = $this->conn->prepare($query);
+            // Bind parameter untuk setiap placeholder
+            foreach ($data as $key => $value) {
+                $stmt->bindValue(":$key", $value);
+            }
+            // Bind parameter untuk WHERE clause jika diperlukan
+            // Misalnya, jika menggunakan WHERE clause untuk id, lalu Anda memiliki data id di $data juga
+            // Anda bisa mengikatnya seperti ini:
+            $stmt->bindValue(":" . array_key_first($primaryK), reset($primaryK));
+
+            if ($stmt->execute()) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Data berhasil diperbarui'
+                ];
+            }
+        } catch (PDOException $e) {
+            echo "Gagal melakukan update: " . $e->getMessage() . "\n\n";
             $response = [
                 'status' => 'error',
                 'message' => 'Gagal memperbarui data'
@@ -83,15 +159,5 @@ class Database
         // Keluarkan respons sebagai JSON
         header('Content-Type: application/json');
         echo json_encode($response);
-    }
-
-    private function getType($value)
-    {
-        if (is_int($value)) return 'i';
-        if (is_double($value)) return 'd';
-        if (is_string($value)) return 's';
-        if (is_bool($value)) return 'b';
-        if (is_null($value)) return 's'; // Assuming null as string
-        return ''; // Unknown type
     }
 }

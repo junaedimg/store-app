@@ -7,7 +7,7 @@ use app\config\config;
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-    <form id="form-submit" method="post" class="needs-validation" action="/manage-inventory/add-product-data">
+    <form id="form" method="post" class="needs-validation" action="/manage-inventory/add-product-data">
         <table class="table rounded-3">
             <tr class="border-dark-subtle">
                 <th>
@@ -61,5 +61,5 @@ use app\config\config;
 <script defer>
 </script>
 <div class="modal-footer">
-    <button id="btn-submit-product" class="btn btn-success" type="submit">Add</button>
+    <button id="btn-add-product" class="btn btn-success" type="submit">Add</button>
 </div>
