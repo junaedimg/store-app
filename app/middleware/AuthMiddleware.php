@@ -15,7 +15,9 @@ class AuthMiddleware
             $password = $_POST['password'];
             $isValidUser = (new UserModel())->authenticate($username, $password);
             if ($isValidUser) {
-                $_SESSION['login'] = true;
+                
+                $_SESSION['role'] =  (new UserModel())->getUserRole($username);
+                $_SESSION['user'] = $username;
                 header('location:' . config::BASEURL);
             }
         }

@@ -20,7 +20,7 @@ $(function () {
   // Navigation
   $("nav ul li a").click(function () {
     // Change navigation title
-    $("header h1#nav-title").html($(this).children("span").html());
+    $("header #nav-title").html($(this).children("span").html());
     // Remove active class from all navigation elements and add it to the currently selected one
     $(".active-nav").removeClass("active-nav");
     $(this).addClass("active-nav");

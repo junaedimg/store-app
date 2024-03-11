@@ -54,15 +54,16 @@ class Validator
     function validateInput($input, string $regexType)
     {
         // Check if input is empty after trimming whitespace
-        if (strlen(trim($input)) === 0) {
-            return false; // Return false if input is empty
-        }
+        // if (strlen(trim($input)) === 0) {
+        //     return false; // Return false if input is empty
+        // }
         // Associative array containing regex patterns for each validation type
         $regexPatterns = [
             "1" => '/^[a-zA-Z0-9\s]+$/',
             "2" => '/^[0-9]+$/'
             // Add other regex types if needed
         ];
+        // echo $input;
         // Check if the regex type exists in the array
         if (isset($regexPatterns[$regexType])) {
             // Perform regex match against the input with the specified pattern

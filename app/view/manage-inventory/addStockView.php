@@ -1,6 +1,7 @@
 <?php
-$dataProduct = $data;
-// $dataUnit = $data["data_unit"];
+$dataProduct = $data["data_product"];
+$dataUnit = $data["data_unit"];
+
 // pp($dataProduct);
 use app\config\config;
 ?>
@@ -8,7 +9,7 @@ use app\config\config;
     <h1 class="modal-title fs-5" id="exampleModalLabel">Add Stock</h1>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
-<div class="modal-body">
+<div class="modal-body add-stock">
 
     <form id="form" method="post" class="needs-validation" action="/manage-inventory/add-product-data">
         <table class="table rounded-3 overflow-visible">
@@ -18,32 +19,46 @@ use app\config\config;
                 </th>
                 <td>:</td>
                 <td>
-                    <select id="no-product" name="no-product" style="display: none;">
-                        <option disabled selected value="w"> Select Unit </option>
-                        <?php
-                        foreach ($dataProduct as $value) {
-                            echo "<option value=" . $value['no_product'] . "></option>";
-                        } ?>
-                    </select>
+                    <div class="select-stock-view">
+                        <select id="no-product" class="no-product" name="no-product" style="display: none;">
+                            <option disabled selected value="w"> Select Unit </option>
+                            <?php
+                            foreach ($dataProduct as $product) {
+                                echo "<option value=" . $product['no_product'] . "></option>";
+                            } ?>
+                        </select>
 
-                    <div class="select-wrapper w-auto position-relative z-3">
-                        <button id="selected" class="select-btn form-control d-inline-flex py-1 px-2 text-decoration-none border rounded-2" type="button">Select Product <i class="uil uil-angle-down"></i></button>
-                        <div id="select-content" class="select-content d-none position-absolute card z-3 w-100">
-                            <div class="search">
-                                <i class="uil uil-search"></i>
-                                <input class="form-control" type="text" placeholder="Search">
+                        <div class="select-wrapper-stock w-auto position-relative z-3">
+                            <button class="select-btn form-control d-inline-flex py-1 px-2 text-decoration-none border rounded-2" type="button">Select Product <i class="uil uil-angle-down"></i></button>
+                            <div id="select-content" class="select-content d-none position-absolute card z-3 w-100">
+                                <div class="search">
+                                    <i class="uil uil-search"></i>
+                                    <input class="form-control" type="text" placeholder="Search">
+                                </div>
+                                <ul class="options list-group overflow-y-scroll" style="max-height: 250px;">
+                                    <?php
+                                    foreach ($dataProduct as $product) :
+                                        if ($product['product_remove'] != 1) : ?>
+                                            <li class=list-group-item data-select=<?= $product['no_product'] ?>>
+                                                <?= $product['product_name'] ?>
+                                                <?php
+                                                foreach ($dataUnit as $unit) :
+                                                    if ($unit['id_unit'] == $product['id_unit']) : ?>
+                                                        (<?= $unit['unit_name'] ?>)
+                                                <?php
+                                                    endif;
+                                                endforeach;
+                                                ?>
+                                            </li>
+                                    <?php
+                                        endif;
+                                    endforeach;
+                                    ?>
+                                </ul>
                             </div>
-                            <ul class="options list-group overflow-y-scroll" style="max-height: 250px;">
-                                <?php
-                                foreach ($dataProduct as $value) {
-                                    if ($value['product_remove'] != 1) {
-                                        echo "<li class=list-group-item data-select =" . $value['no_product'] . ">" . $value['product_name'] . "</li>";
-                                    }
-                                } ?>
-                            </ul>
                         </div>
+                        <div class="invalid-feedback"> Please select a unit first</div>
                     </div>
-                    <div class="invalid-feedback"> Please select a unit first</div>
                 </td>
 
             </tr>

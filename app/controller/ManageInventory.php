@@ -39,8 +39,10 @@ class ManageInventory extends Controller
     // -- Stock
     function addStockPage($data)
     {
+        $dataUnit = $this->getModel("ManageInventoryModel")->getUnit();
         $dataProduct = $this->getModel("ManageInventoryModel")->getProductData();
-        $this->getView("manage-inventory/addStockView", $dataProduct);
+        $data = ['data_unit' => $dataUnit, 'data_product' => $dataProduct];
+        $this->getView("manage-inventory/addStockView", $data);
     }
     function editStockPage($data)
     {

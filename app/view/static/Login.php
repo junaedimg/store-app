@@ -16,7 +16,7 @@ use app\config\config;
     <form method="post" action="" class="form-control d-flex flex-column gap-3 p-5 border-black border-opacity-10 shadow">
         <div class="d-flex justify-content-center">
             <div class="logo mb-3">
-                <h1>App Store</h1>
+                <h1>Store App</h1>
             </div>
         </div>
         <div class="">

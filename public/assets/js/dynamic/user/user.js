@@ -55,6 +55,13 @@ $(document).ready(function () {
                 $("#modal").modal("hide");
               });
             }
+            if (res.status == "gagal") {
+              Swal.fire({
+                title: "Gagal!",
+                text: res.message,
+                icon: "warning",
+              });
+            }
           });
         }
       });

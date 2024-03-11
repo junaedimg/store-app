@@ -9,8 +9,8 @@ use PDOException;
 
 class Database
 {
-    private $conn;
-    private $connPdo;
+    public $conn;
+    // private $connPdo;
     function __construct()
     {
         $dsn = "mysql:host=" . config::HOSTNAME . ";dbname=" . config::DATABASE_NAME;
@@ -23,15 +23,11 @@ class Database
     }
 
     // read data
-    public function read(string $table, $mode = '1', string $cond = "", array $params = [])
+    public function read(string $table, string $mode = '1', string $cond = "")
     {
         $query = "SELECT * FROM $table $cond";
         // Persiapkan statement
         $stmt = $this->conn->prepare($query);
-        // Bind parameter jika ada
-        foreach ($params as $key => $value) {
-            $stmt->bindParam(":$key", $value);
-        }
         // Eksekusi statement
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -47,6 +43,31 @@ class Database
                 break;
         }
     }
+    // // read data
+    // public function read(string $table, string $mode = '1', string $cond = "", array $params = [])
+    // {
+    //     $query = "SELECT * FROM $table $cond";
+    //     // Persiapkan statement
+    //     $stmt = $this->conn->prepare($query);
+    //     // Bind parameter jika ada
+    //     foreach ($params as $key => $value) {
+    //         $stmt->bindParam(":$key", $value);
+    //     }
+    //     // Eksekusi statement
+    //     $stmt->execute();
+    //     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    //     // server_side / client_side
+    //     switch ($mode) {
+    //         case '1':
+    //             return $data;
+    //             break;
+    //         case '2':
+    //             header('Content-Type: application/json');
+    //             echo json_encode($data);
+    //             break;
+    //     }
+    // }
 
 
     public function customQuery(string $quer, string $method)

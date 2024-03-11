@@ -10,7 +10,7 @@ use app\config\config;
     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Stock</h1>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
-<div class="modal-body">
+<div class="modal-body edit-stock">
 
     <form id="form" method="post" class="needs-validation" action="/manage-inventory/add-product-data">
         <table class="table rounded-3 overflow-visible">

@@ -18,8 +18,8 @@ export class Stock {
   }
 
   static loadTableStock() {
-    console.log("loadTable")
-    let table = $("#table")
+    console.log("loadTable");
+    let table = $(".add-stock #table")
       .DataTable
       //   {
       //   columnDefs: [
@@ -45,9 +45,9 @@ export class Stock {
         // define liveSearch Select
         // handle qty input
         $(document).ready(function () {
-          $(".btn-number").click(function (e) {
+          $(".add-stock .btn-number").click(function (e) {
             var type = $(this).attr("data-type");
-            var input = $("input.input-number");
+            var input = $(".add-stock input.input-number");
             var currentVal = parseInt(input.val());
             if (!isNaN(currentVal)) {
               if (type == "minus") {
@@ -59,7 +59,7 @@ export class Stock {
               }
             }
           });
-          $(".input-number").keydown(function (e) {
+          $(".add-stock .input-number").keydown(function (e) {
             // Allow: backspace, delete, tab, escape, enter and .
             if (
               $.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
@@ -79,7 +79,7 @@ export class Stock {
               e.preventDefault();
             }
           });
-          $(".input-number").keyup(function () {
+          $(".add-stock .input-number").keyup(function () {
             if (/^0/.test($(this).val())) {
               $(this).val($(this).val().replace(/^0/, ""));
             }
@@ -93,12 +93,13 @@ export class Stock {
   }
   // select true value from div select
   static initSelect() {
-    $(document).on("click", ".select-btn", function () {
-      $(".select-content").toggleClass("d-none ");
-      $(".search input").on("keyup", function () {
-        let searchWord = $(this).val().toLowerCase().trim();
-        $("ul.options li").each((i, elm) => {
-          let strElm = elm.innerText.trim();
+    $(document).on("click", ".select-wrapper-stock .select-btn", function () {
+      console.log("click");
+      $(".add-stock .select-content").toggleClass("d-none ");
+      $(".add-stock .search input").on("keyup", function () {
+        let searchWord = $(this).val().trim().toLowerCase();
+        $(".add-stock ul.options li").each((i, elm) => {
+          let strElm = elm.innerText.trim().toLowerCase();
           let selected = strElm.startsWith(searchWord);
           !selected
             ? elm.classList.add("d-none")
@@ -107,29 +108,32 @@ export class Stock {
       });
     });
     // set true select value
-    $(document).on("click", "ul.options li", function () {
-      $(".select-content").toggleClass("d-none");
-      $("#selected").html($(this).html());
-      $("#no-product").val($(this).attr("data-select"));
-      let data = new FormData($("#form")[0]);
+    $(document).on("click", ".select-wrapper-stock ul.options li", function () {
+      $(".add-stock .select-wrapper-stock .select-content").toggleClass(
+        "d-none"
+      );
+      $(".add-stock .select-wrapper-stock .select-btn").html($(this).html());
+      $(".add-stock #no-product").val($(this).attr("data-select"));
+      let data = new FormData($(".add-stock #form")[0]);
       for (var pair of data.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
+        // console.log(pair[0] + ", " + pair[1]);
       }
     });
   }
 
   static addStock() {
     $(document).on("click", "#btn-add-stock", async function () {
+      console.log("click");
       const inputs = [
         { id: "#no-product", rule: "2" },
         { id: "#qty", rule: "2" },
       ];
-
+      console.log(inputs);
       // // Melakukan validasi untuk setiap nilai
       let isValid = validateForm(inputs);
       // // Jika semua data valid, lanjutkan dengan pengiriman data
       if (isValid) {
-        const formData = new FormData($("#form")[0]);
+        const formData = new FormData($(".add-stock #form")[0]);
         let data = await sendFormData(
           formData,
           "/manage-inventory/add-stock-data",
@@ -142,7 +146,7 @@ export class Stock {
                 text: "You clicked the button!",
                 icon: "success",
               });
-              $("#modal").modal("hide");
+              $(" #modal").modal("hide");
             });
           }
         });
@@ -190,13 +194,13 @@ export class Stock {
         id: $(this).attr("data-id"),
       }).then(function () {
         $(document).ready(function () {
-          $(".btn-number").click(function (e) {
+          $(".edit-stock .btn-number").click(function (e) {
             var type = $(this).attr("data-type");
-            var input = $("input.input-number");
+            var input = $(".edit-stock input.input-number");
             var currentVal = parseInt(input.val());
             if (!isNaN(currentVal)) {
               if (type == "minus") {
-                if (currentVal > 1) {
+                if (currentVal >= 1) {
                   input.val(currentVal - 1).change();
                 }
               } else if (type == "plus") {
@@ -204,7 +208,7 @@ export class Stock {
               }
             }
           });
-          $(".input-number").keydown(function (e) {
+          $(".edit-stock .input-number").keydown(function (e) {
             // Allow: backspace, delete, tab, escape, enter and .
             if (
               $.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
@@ -224,13 +228,13 @@ export class Stock {
               e.preventDefault();
             }
           });
-          $(".input-number").keyup(function () {
-            if (/^0/.test($(this).val())) {
-              $(this).val($(this).val().replace(/^0/, ""));
-            }
-            if ($(this).val() == 0) {
-              $(this).val(1);
-            }
+          $(".edit-stock .input-number").keyup(function () {
+            // if (/^0/.test($(this).val())) {
+            //   $(this).val($(this).val().replace(/^0/, ""));
+            // }
+            // if ($(this).val() == 0) {
+            //   $(this).val(1);
+            // }
           });
         });
       });
@@ -248,7 +252,7 @@ export class Stock {
       let isValid = validateForm(inputs);
       // // Jika semua data valid, lanjutkan dengan pengiriman data
       if (isValid) {
-        const formData = new FormData($("#form")[0]);
+        const formData = new FormData($(".edit-stock #form")[0]);
         let data = await sendFormData(
           formData,
           "/manage-inventory/edit-stock-data",

@@ -9,5 +9,6 @@ class config
         BASEURL = "http://" . SELF::HOSTNAME . "/store-app",
         DATABASE_NAME = "store_app",
         DATABASE_USERNAME = "root",
-        DATABSE_PASSWORD = "";
+        DATABSE_PASSWORD = "",
+        ZONA = 'Asia/Jakarta';
 }

@@ -22,13 +22,29 @@ class UserModel extends validator
         $isUser = count($isUser) == 1 ? true : false;
         return $isUser;
     }
-
+    public function getUserRole($username)
+    {
+        $role = $this->db->read('user', '1', " WHERE username = '$username'")[0]['id_role'];
+        return $role;
+    }
     function addUserData($data)
     {
         $username = trim($data['username']);
         $password = trim($data['password']);
         $role = trim($data['role']);
         $image = $_FILES['image'];
+
+        $isRegistered = count($this->db->read("user", "1", "where username = '$username'")) > 0;
+        if ($isRegistered) {
+            $response = [
+                'status' => 'gagal',
+                'message' => 'User Sudah Terdaftar'
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+
 
         // validation
         $username = $this->validateInput($username, "1");

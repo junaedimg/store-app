@@ -35,7 +35,7 @@ use app\config\config;
                 <nav class="p-3 h-100 min-vh-100">
                     <div class="container mb-4">
                         <span class="">
-                            <h1 class="text-nowrap">App Store</h1>
+                            <h1 class="text-nowrap">Store App</h1>
                         </span>
                     </div>
                     <ul class="link p-0">
@@ -61,27 +61,31 @@ use app\config\config;
                                 <span>Transaction Log</span>
                             </a>
                         </li>
-                        <li class="list-unstyled rounded-2">
-                            <a href="/manage-inventory/index" class="text-nowrap">
-                                <div class="logo"><i class="fa-solid fa-boxes-stacked"></i></div>
-                                <span>Manage Inventory</span>
-                            </a>
-                        </li>
+                        <?php if ($_SESSION['role'] == 2) : ?>
+                            <li class="list-unstyled rounded-2">
+                                <a href="/manage-inventory/index" class="text-nowrap">
+                                    <div class="logo"><i class="fa-solid fa-boxes-stacked"></i></div>
+                                    <span>Manage Inventory</span>
+                                </a>
+                            </li>
+                        <?php endif ?>
                         <!-- <li class="list-unstyled rounded-2">
                             <a href="/Chart/index" class="text-nowrap">
                                 <div class="logo"><i class="fa-solid fa-chart-pie"></i></div>
                                 <span>Chart</span>
                             </a>
                         </li> -->
-                        <li class="list-unstyled sub-nav">
-                            <span>Admin</span>
-                        </li>
-                        <li class="list-unstyled rounded-2">
-                            <a href="/user/index" class="text-nowrap">
-                                <div class="logo"><i class="fa-solid fa-user"></i></div>
-                                <span>Users</span>
-                            </a>
-                        </li>
+                        <?php if ($_SESSION['role'] == 2) : ?>
+                            <li class="list-unstyled sub-nav">
+                                <span>Admin</span>
+                            </li>
+                            <li class="list-unstyled rounded-2">
+                                <a href="/user/index" class="text-nowrap">
+                                    <div class="logo"><i class="fa-solid fa-user"></i></div>
+                                    <span>Users</span>
+                                </a>
+                            </li>
+                        <?php endif ?>
                     </ul>
                 </nav>
                 <!-- END NAVIGATION -->
@@ -89,14 +93,14 @@ use app\config\config;
             <div class="container-fluid p-0 d-flex flex-column min-vh-100">
                 <!-- HEADER -->
                 <header class="py-2 px-3 d-flex justify-content-between">
-                    <h1 id="nav-title" class="m-0">Dashboard</h1>
+                    <h2 id="nav-title" class="m-0">Dashboard</h2>
                     <div class="option d-flex">
                         <button id="btn-theme" class="btn btn-primary btn-custom shadow ">Toggle Mode</button>
                         <div class="account p-2 ms-2 list-unstyled rounded-2">
                             <div class="user">
                                 <div class="user-info">
-                                    <span class="name">Junaedi M G</span>
-                                    <span class="name">Admin</span>
+                                    <span class="name"><?= $_SESSION['user'] ?></span>
+                                    <span class="name"><?= ($_SESSION['role'] == 1 ? "staff" : "admin")  ?></span>
                                 </div>
                                 <a id="btn-logout" class="text-nowrap logout">
                                     <i class="fa-solid fa-right-from-bracket"></i>
@@ -122,7 +126,7 @@ use app\config\config;
                 <!-- MAIN -->
                 <main class="flex-grow-1 ms-2 mt-2 p-2 rounded-3 h-100 pb-5">
                     <?php
-                    (new app\controller\User)->index(array());
+                    (new app\controller\Purchase)->index(array());
                     ?>
                 </main>
                 <!-- END MAIN -->

@@ -172,7 +172,10 @@ class ManageInventoryModel extends Validator
         $noProduct = $this->validateInput($noProduct, "2");
         $qty = $this->validateInput($qty, "2");
         // check whether stock is available
-        if ($noProduct and $qty) {
+        // echo $noProduct;
+        // echo "\n";
+        // echo $qty;
+        if ($noProduct and ($qty !== false)) {
             $data = [
                 "qty" => $qty,
             ];
